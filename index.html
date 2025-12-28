@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Var Shankar | AI Governance, Law & Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #faf9f7;
+            --color-text: #1a1a1a;
+            --color-text-muted: #6b6b6b;
+            --color-accent: #2d4a3e;
+            --color-accent-light: #4a7c6f;
+            --color-border: #e8e6e3;
+            --color-card: #ffffff;
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 249, 247, 0.92);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+        .logo:hover { opacity: 0.7; }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .nav-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--color-text); }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 7rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hero-content {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 3.5rem;
+            align-items: start;
+            width: 100%;
+        }
+        .hero-image-container {
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        .hero-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .hero-text {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+        .hero-subtitle {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.25rem, 4.5vw, 3rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+        .hero-bio {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            max-width: 580px;
+            margin-bottom: 1rem;
+        }
+        .hero-bio a {
+            color: var(--color-accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .hero-bio a:hover { border-color: var(--color-accent); }
+        .affiliations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+        .affiliation-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.4rem 0.85rem;
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            transition: all 0.3s ease;
+        }
+        .affiliation-tag:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+        .affiliation-tag svg { width: 12px; height: 12px; opacity: 0.7; }
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .section-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 400;
+        }
+        .card {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--color-accent);
+            transition: height 0.4s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+        }
+        .card:hover::before { height: 100%; }
+        .card-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            line-height: 1.35;
+        }
+        .card-description {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        .card-meta {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: gap 0.3s ease;
+            margin-top: auto;
+        }
+        .card-link:hover { gap: 0.65rem; }
+        .card-link svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+        .course-header {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .course-header-content { flex: 1; }
+        .course-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .course-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+        .course-header-badge {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .course-header-badge svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .module-number {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .course-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+        .course-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: gap 0.3s ease;
+        }
+        .course-links a:hover { gap: 0.5rem; }
+        .course-links svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+        footer {
+            background: var(--color-text);
+            color: white;
+            padding: 2.5rem 2rem;
+            margin-top: 3rem;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .footer-links a:hover { color: white; }
+        .footer-links svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 900px) {
+            .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-image-container { max-width: 220px; margin: 0 auto; }
+            .hero-text { text-align: center; }
+            .hero-bio { margin-left: auto; margin-right: auto; }
+            .affiliations { justify-content: center; }
+            .course-header { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 0.75rem; padding: 0.75rem 1rem; }
+            .nav-links { justify-content: center; gap: 0.75rem 1rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+            section { padding: 3rem 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .nav-links { gap: 0.5rem 0.75rem; }
+            .nav-links a { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Var Shankar</a>
+            <ul class="nav-links">
+                <li><a href="#">About</a></li>
+                <li><a href="#talks">Talks</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#course">Kaggle Course</a></li>
+                <li><a href="https://podcast.caigov.org/" target="_blank">Podcast</a></li>
+                <li><a href="https://www.linkedin.com/in/var-shankar/" target="_blank">LinkedIn</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-image-container">
+                <img src="var.png" alt="Var Shankar" class="hero-image">
+            </div>
+            <div class="hero-text">
+                <p class="hero-subtitle">AI Governance, Law & Policy</p>
+                <h1 class="hero-title">Var Shankar</h1>
+                <p class="hero-bio">
+                    Var Shankar is an attorney and AI policy adviser who works with large organizations on complex regulatory, privacy and AI matters. He leads the <a href="https://www.caigov.org/" target="_blank">Council on AI Governance</a> and teaches AI governance at <a href="https://www.purdue.edu/" target="_blank">Purdue University</a>. Var previously practiced law at <a href="https://www.cravath.com/" target="_blank">Cravath, Swaine & Moore LLP</a> and worked on the <a href="https://www.clintonfoundation.org/programs/leadership-public-service/clinton-global-initiative/" target="_blank">Clinton Global Initiative</a>. He is a graduate of Harvard Law School.
+                </p>
+                <div class="affiliations">
+                    <span class="affiliation-tag">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        OECD Network of Experts on AI
+                    </span>
+                    <span class="affiliation-tag">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        WEF AI Governance Alliance
+                    </span>
+                    <span class="affiliation-tag">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
+                        Brookings Forum for Cooperation on AI
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="talks">
+        <div class="section-header fade-in">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <h2 class="section-title">Featured Talks</h2>
+        </div>
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <span class="card-label">New York City Bar Association</span>
+                <h3 class="card-title">Keynote on AI in Clinical Care</h3>
+                <p class="card-meta">October 16, 2025</p>
+                <p class="card-description">Keynote address exploring the applications and governance challenges of AI systems in clinical healthcare settings.</p>
+                <a href="https://www.nycbar.org/cle-offerings/artificial-intelligence-and-clinical-care/" target="_blank" class="card-link">Learn More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">IAPP Global Privacy Summit</span>
+                <h3 class="card-title">Security Implications of Foundation Models</h3>
+                <p class="card-meta">April 23, 2025</p>
+                <p class="card-description">Panel with representatives from EU, Microsoft and Humane Intelligence exploring the range of security risks posed by frontier models.</p>
+                <a href="https://iapp.org/conference/iapp-global-summit" target="_blank" class="card-link">Learn More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">MIT Sloan AI & ML Conference</span>
+                <h3 class="card-title">Policy in the Era of Gen AI</h3>
+                <p class="card-meta">March 9, 2024 — with Benjamin Della Rocca (White House) & Latanya Sweeney (Harvard)</p>
+                <p class="card-description">Panel discussion on shaping effective AI policy frameworks for the generative AI era.</p>
+                <a href="https://www.youtube.com/watch?v=aqsxC-kwg-U" target="_blank" class="card-link">Learn More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">Harvard Business School</span>
+                <h3 class="card-title">Realizing AI's Potential in Healthcare</h3>
+                <p class="card-meta">November 15, 2023</p>
+                <p class="card-description">Discussing how AI can transform healthcare delivery while maintaining ethical standards and patient safety.</p>
+                <a href="https://d3.harvard.edu/events/realizing-healthcares-ai-potential-maximizing-the-benefits-minimizing-the-risks/" target="_blank" class="card-link">Learn More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">Financial Times Live</span>
+                <h3 class="card-title">AI's Role in Achieving Corporate Sustainability Goals</h3>
+                <p class="card-meta">November 2, 2023</p>
+                <p class="card-description">Examining how artificial intelligence can accelerate corporate sustainability initiatives and ESG compliance.</p>
+                <a href="https://corporatesustainabilityai.live.ft.com/" target="_blank" class="card-link">Learn More <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="articles">
+        <div class="section-header fade-in">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h2 class="section-title">Featured Articles</h2>
+        </div>
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <span class="card-label">OECD.AI</span>
+                <h3 class="card-title">When Your AI Knows You Better Than Anyone: Privacy in the Age of Intimate Assistants</h3>
+                <p class="card-meta">August 19, 2025</p>
+                <p class="card-description">Examining the profound privacy implications of AI systems that develop deep understanding of individual users.</p>
+                <a href="https://oecd.ai/en/wonk/when-your-ai-knows-you-better-than-anyone-privacy-in-the-age-of-intimate-assistants" target="_blank" class="card-link">Read Article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">AI and Ethics Journal</span>
+                <h3 class="card-title">Context-Specific Certification of AI Systems</h3>
+                <p class="card-meta">April 11, 2025 — with Kendall Brogle, Emma Kallina, Holli Sargeant & others</p>
+                <p class="card-description">Proposing a third-party, system-level AI certification framework to bridge regulatory gaps.</p>
+                <a href="https://link.springer.com/article/10.1007/s43681-025-00720-w" target="_blank" class="card-link">Read Article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">IAPP</span>
+                <h3 class="card-title">AI Governance in Health Care</h3>
+                <p class="card-meta">2024 — with Ashley Casovan</p>
+                <p class="card-description">Exploring the unique governance challenges and frameworks for deploying AI responsibly in healthcare settings.</p>
+                <a href="https://iapp.org/news/a/ai-governance-in-health-care" target="_blank" class="card-link">Read Article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">Boston Consulting Group</span>
+                <h3 class="card-title">A Guide to AI Governance for Business Leaders</h3>
+                <p class="card-meta">November 29, 2023 — with Steve Mills and Ashley Casovan</p>
+                <p class="card-description">Comprehensive guidance for business leaders on implementing effective AI governance frameworks within their organizations.</p>
+                <a href="https://www.bcg.com/publications/2023/a-guide-to-mitigating-ai-risks" target="_blank" class="card-link">Read Article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+            <div class="card fade-in">
+                <span class="card-label">World Economic Forum Agenda</span>
+                <h3 class="card-title">This Underestimated Tool Could Make AI Innovation Safer</h3>
+                <p class="card-meta">August 5, 2022 — with Ashley Casovan</p>
+                <p class="card-description">Exploring underutilized approaches that can enhance AI safety while supporting continued innovation.</p>
+                <a href="https://www.weforum.org/stories/2022/08/responsible-ai-certification-programmes/" target="_blank" class="card-link">Read Article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="course">
+        <div class="section-header fade-in">
+            <div class="section-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <h2 class="section-title">Kaggle Course: Intro to AI Ethics</h2>
+        </div>
+        <div class="course-header fade-in">
+            <div class="course-header-content">
+                <h3>Intro to AI Ethics</h3>
+                <p>A comprehensive course exploring practical tools to guide the moral design of AI systems. Co-taught with Alexis Cook on Kaggle Learn.</p>
+            </div>
+            <div class="course-header-badge">
+                <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+        </div>
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <span class="module-number">Module 1</span>
+                <h3 class="card-title">Introduction to AI Ethics</h3>
+                <p class="card-description">Learn what to expect from the course and understand the foundational concepts of AI ethics.</p>
+                <div class="course-links">
+                    <a href="https://www.kaggle.com/code/var0101/introduction-to-ai-ethics" target="_blank"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Tutorial</a>
+                    <a href="https://www.kaggle.com/learn/intro-to-ai-ethics" target="_blank"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Exercise</a>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <span class="module-number">Module 2</span>
+                <h3 class="card-title">Human-Centered Design for AI</h3>
+                <p class="card-description">Design systems that serve people's needs and navigate issues in several real-world scenarios.</p>
+                <div class="course-links">
+                    <a href="https://www.kaggle.com/code/var0101/human-centered-design-for-ai" target="_blank"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Tutorial</a>
+                    <a href="https://www.kaggle.com/learn/intro-to-ai-ethics" target="_blank"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Exercise</a>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <span class="module-number">Module 3</span>
+                <h3 class="card-title">Identifying Bias in AI</h3>
+                <p class="card-description">Understand how bias can creep in at any stage. Investigate a simple model that identifies toxic text.</p>
+                <div class="course-links">
+                    <a href="https://www.kaggle.com/code/alexisbcook/identifying-bias-in-ai" target="_blank"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Tutorial</a>
+                    <a href="https://www.kaggle.com/learn/intro-to-ai-ethics" target="_blank"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Exercise</a>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <span class="module-number">Module 4</span>
+                <h3 class="card-title">AI Fairness</h3>
+                <p class="card-description">Learn about four different types of fairness and assess a model trained to judge credit card applications.</p>
+                <div class="course-links">
+                    <a href="https://www.kaggle.com/code/alexisbcook/ai-fairness" target="_blank"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Tutorial</a>
+                    <a href="https://www.kaggle.com/learn/intro-to-ai-ethics" target="_blank"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Exercise</a>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <span class="module-number">Module 5</span>
+                <h3 class="card-title">Model Cards</h3>
+                <p class="card-description">Increase transparency by communicating key information about machine learning models effectively.</p>
+                <div class="course-links">
+                    <a href="https://www.kaggle.com/code/var0101/model-cards" target="_blank"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Tutorial</a>
+                    <a href="https://www.kaggle.com/learn/intro-to-ai-ethics" target="_blank"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Exercise</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <span class="footer-logo">Var Shankar</span>
+            <ul class="footer-links">
+                <li><a href="https://www.linkedin.com/in/var-shankar/" target="_blank"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a></li>
+                <li><a href="https://podcast.caigov.org/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Podcast</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
